@@ -1,0 +1,163 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header h3">
+                        <div class="col col-lg-6">
+                            <strong class="card-title">Members</strong>
+                        </div>
+                        <div class="col col-lg-4">
+                            <form action="" method="post" class="form">
+                                <div class="input-group">
+                                    <input type="email" id="input2-group2" name="input2-group2" placeholder="" class="form-control">
+                                    <div class="input-group-btn"><button class="btn btn-primary">Search</button></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col col-lg-2">
+                            <div class="input-group-btn">
+                                <button class="btn btn-warning rounded mb-1" data-toggle="modal" data-target="#addMemberModal">
+                                    <i class="fa fa-users"></i> Add Member
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <th>First Name</th>
+                                    <th>Navigation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in members %}
+                                <tr>
+                                    <td>{{member.lname}}</td>
+                                    <td>{{member.fname}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-sm rounded" data-toggle="modal" data-target="#addTransaction">
+                                            <i class="fa fa fa-plus-circle"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-primary btn-sm rounded">
+                                            <i class="fa fa fa-book"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm rounded">
+                                            <i class="fa fa fa-times-circle"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<!--Add Member Modal -->
+<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body card-block">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">First Name</label></div>
+                            <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Enter First Name" class="form-control"><small class="help-block form-text"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Last Name</label></div>
+                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Surname" class="form-control"><small class="help-block form-text"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 margin-top-10px"><label for="select" class=" form-control-label">Sex</label></div>
+                            <div class="col-12 col-md-9">
+                                <select name="select" id="select" class="form-control">
+                                    <option value="0">Male</option>
+                                    <option value="1">Female #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Contact No.</label></div>
+                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Phone Number" class="form-control"><small class="help-block form-text"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Address</label></div>
+                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Complete Address" class="form-control"><small class="help-block form-text"></small></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Add Member Modal -->
+
+<!--Add Member Modal -->
+<div class="modal fade" id="addTransaction" tabindex="-1" role="dialog" aria-labelledby="addTransactionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md add-trans-modal" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTransactionLabel">Add Givings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body card-block">
+                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col col-md-4 margin-top-10px"><label for="trans-date" class="form-control-label">Date</label></div>
+                            <div class="col-12 col-md-8"><input type="date" id="trans-date" name="trans-date" class="form-control"><small class="help-block form-text"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4 margin-top-10px"><label for="trans-name" class="form-control-label">Name</label></div>
+                            <div class="col-12 col-md-8"><input type="text-input" id="trans-name" name="trans-name" value="AAAA" disabled class="form-control"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-4 margin-top-10px"><label for="trans-tithe" class="form-control-label">Prayer Breakfast</label></div>
+                            <div class="col-12 col-md-8"><input type="number" id="trans-tithe" name="trans-tithe" class="form-control"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Submit
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Add Member Modal -->
+
+{% endblock %}
