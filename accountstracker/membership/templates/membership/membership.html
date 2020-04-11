@@ -1,10 +1,83 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% load static %}
 
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-icon dib">
+                                    <i class="ti-server text-muted"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">Current Members</div>
+                                        <div class="stat-text">{{ members_count }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-icon dib">
+                                    <i class="ti-user text-muted"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">New Users</div>
+                                        <div class="stat-text">{{ created_today_count }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-icon dib">
+                                    <i class="ti-stats-up text-muted"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">Daily Sales</div>
+                                        <div class="stat-text">Total: $76,58,714</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="stat-widget-four">
+                                <div class="stat-icon dib">
+                                    <i class="ti-pulse text-muted"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-heading">Bandwidth</div>
+                                        <div class="stat-text">Total: 4TB</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header h3">
@@ -14,21 +87,21 @@
                         <div class="col col-lg-4">
                             <form action="" method="post" class="form">
                                 <div class="input-group">
-                                    <input type="email" id="input2-group2" name="input2-group2" placeholder="" class="form-control">
+                                    <input type="text" id="member-search" name="input2-group2" placeholder="" class="form-control">
                                     <div class="input-group-btn"><button class="btn btn-primary">Search</button></div>
                                 </div>
                             </form>
                         </div>
                         <div class="col col-lg-2">
                             <div class="input-group-btn">
-                                <button class="btn btn-warning rounded mb-1" data-toggle="modal" data-target="#addMemberModal">
+                                <button class="btn btn-primary rounded mb-1" data-toggle="modal" data-target="#addMemberModal">
                                     <i class="fa fa-users"></i> Add Member
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="bootstrap-data-table-export" class="table table-bordered">
+                        <table id="bootstrap-data-table-export members-table" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Last Name</th>
@@ -36,24 +109,8 @@
                                     <th>Navigation</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            {% for member in members %}
-                                <tr>
-                                    <td>{{member.lname}}</td>
-                                    <td>{{member.fname}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm rounded" data-toggle="modal" data-target="#addTransaction">
-                                            <i class="fa fa fa-plus-circle"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary btn-sm rounded">
-                                            <i class="fa fa fa-book"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-danger btn-sm rounded">
-                                            <i class="fa fa fa-times-circle"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                            <tbody id="members-content">
+                                {% include 'membership/members.html' %}
                             </tbody>
                         </table>
                     </div>
@@ -67,53 +124,58 @@
 <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                        <div class="row form-group">
-                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">First Name</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="text-input" name="text-input" placeholder="Enter First Name" class="form-control"><small class="help-block form-text"></small></div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Last Name</label></div>
-                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Surname" class="form-control"><small class="help-block form-text"></small></div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 margin-top-10px"><label for="select" class=" form-control-label">Sex</label></div>
-                            <div class="col-12 col-md-9">
-                                <select name="select" id="select" class="form-control">
-                                    <option value="0">Male</option>
-                                    <option value="1">Female #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
-                                </select>
+            <form action="{% url 'add_member' %}" id="add_member_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body card-block">
+                        <div class="form-horizontal">
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-fname" class=" form-control-label">First Name</label></div>
+                                <div class="col-12 col-md-9"><input type="text" id="add_member_fname" required name="fname" placeholder="Enter First Name" class="form-control"><small class="help-block form-text"></small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-lname" class=" form-control-label">Last Name</label></div>
+                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_lname" name="lname" placeholder="Enter Surname" class="form-control"><small class="help-block form-text"></small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-sex" class=" form-control-label">Sex</label></div>
+                                <div class="col-12 col-md-9">
+                                    <select name="sex" id="add_member_sex" class="form-control">
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-bdate" class=" form-control-label">Birthday</label></div>
+                                <div class="col-12 col-md-9"><input type="date" id="add_member_bdate" name="bdate" class="form-control"><small class="help-block form-text"></small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-contact" class=" form-control-label">Contact No.</label></div>
+                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_contact" name="contact" placeholder="Enter Phone Number" class="form-control"><small class="help-block form-text"></small></div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3 margin-top-10px"><label for="text-address" class=" form-control-label">Address</label></div>
+                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_address" name="address" placeholder="Enter Complete Address" class="form-control"><small class="help-block form-text"></small></div>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Contact No.</label></div>
-                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Phone Number" class="form-control"><small class="help-block form-text"></small></div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-3 margin-top-10px"><label for="text-input" class=" form-control-label">Address</label></div>
-                            <div class="col-12 col-md-9"><input type="text-input" id="text-input" name="text-input" placeholder="Enter Complete Address" class="form-control"><small class="help-block form-text"></small></div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-dot-circle-o"></i> Submit
                     </button>
                     <button type="reset" class="btn btn-danger btn-sm">
                         <i class="fa fa-ban"></i> Reset
                     </button>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -158,6 +220,49 @@
         </div>
     </div>
 </div>
+
+{% if is_success %}
+    {% if is_success == 'success' %}
+        <div class="alert alert-success alert-dismissible fade show sticky-bottom">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Successfully added new member!
+        </div>
+    {% else %}
+        <div class="alert alert-danger alert-dismissible fade show sticky-bottom">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Failed in adding new member
+        </div>
+    {% endif %}
+{% endif %}
+
 <!--End Add Member Modal -->
+<!-- <script type="text/javascript">
+    $(document).on('submit', '#add_member_form', function(e){
+        e.preventDefault();
+        var fname =  $('add_member_fname').val().trim();
+        var lname = $('add_member_lname').val().trim();
+        var bdate = $('add_member_bdate').val();
+        var sex = $('add_member_sex').val();
+        var contact = $('add_member_contact').val();
+        var address = $('add_member_address').val();
+
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'add_member' %}",
+            data: {
+                fname: $('add_member_fname').val(),
+                lname: $('add_member_lname').val(),
+                sex: $('add_member_sex').val(),
+                contact: $('add_member_contact').val(),
+                address: $('add_member_address').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
+            },
+            dataType: 'json',
+            success:function(){
+                alert("Created new user");
+            }
+        });
+    });
+</script> -->
 
 {% endblock %}

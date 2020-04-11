@@ -7680,6 +7680,10 @@ button.bg-dark:focus {
   padding-top: 1.5rem !important;
 }
 
+.pb-4v2{
+  padding-top: 0rem !important;
+}
+
 .pr-4,
 .px-4 {
   padding-right: 1.5rem !important;
@@ -9028,3 +9032,14 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.bg-white {
+  background: #f1f2f7
+}
+
+.border-pane{
+  border: 1px solid rgba(0,0,0,.125) !important;
+}
+
+.card-header-blue {
+  background-color: rgba(126, 182, 214, 0.65) !important;
+}
