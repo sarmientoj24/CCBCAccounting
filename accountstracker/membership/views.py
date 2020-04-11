@@ -29,7 +29,7 @@ def add_member(request):
     is_success = "fail"
     if request.method == 'POST':
         form = MemberForm(request.POST)
-        print(form.errors)
+
         if form.is_valid():
             try:
                 form.fname = form.cleaned_data['fname']
