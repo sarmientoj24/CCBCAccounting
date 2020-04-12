@@ -1,17 +1,15 @@
 {% for member in members %}
     <tr>
-        <td>{{member.lname}}</td>
-        <td>{{member.fname}}</td>
+        <td>{{member.lname|default:""}}</td>
+        <td>{{member.fname|default:""}}</td>
+        <td>{{member.mname|default:""}}</td>
         <td>
-            <button type="button" class="btn btn-success btn-sm rounded" data-toggle="modal" data-target="#addTransaction">
-                <i class="fa fa fa-plus-circle"></i>
+            <button type="button" class="btn btn-success btn-sm rounded openaddTransaction" data-id="{{ member.id }}" data-toggle="modal" data-target="#addTransaction">
+                <i class="fa fa fa-plus-circle">&nbsp;Add Giving</i>
             </button>
             <a href="{% url 'profile' member.id %}" class="btn btn-primary btn-sm rounded">
-                <i class="fa fa fa-book"></i>
+                <i class="fa fa fa-book">&nbsp;Profile</i>
             </a>
-            <button type="button" class="btn btn-danger btn-sm rounded">
-                <i class="fa fa fa-times-circle"></i>
-            </button>
         </td>
     </tr>
 {% endfor %}

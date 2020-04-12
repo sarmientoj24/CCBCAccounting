@@ -5,79 +5,8 @@
 
 <div class="content mt-3">
     <div class="animated fadeIn">
-        <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-server text-muted"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">Current Members</div>
-                                        <div class="stat-text">{{ members_count }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-user text-muted"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">New Users</div>
-                                        <div class="stat-text">{{ created_today_count }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-stats-up text-muted"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">Daily Sales</div>
-                                        <div class="stat-text">Total: $76,58,714</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-pulse text-muted"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">Bandwidth</div>
-                                        <div class="stat-text">Total: 4TB</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+        {% include 'membership/members_widget.html' %}
+        <div class="row"></div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header h3">
@@ -106,6 +35,7 @@
                                 <tr>
                                     <th>Last Name</th>
                                     <th>First Name</th>
+                                    <th>Middle Name</th>
                                     <th>Navigation</th>
                                 </tr>
                             </thead>
@@ -121,105 +51,11 @@
 </div><!-- .content -->
 
 <!--Add Member Modal -->
-<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <form action="{% url 'add_member' %}" id="add_member_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                {% csrf_token %}
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-body card-block">
-                        <div class="form-horizontal">
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-fname" class=" form-control-label">First Name</label></div>
-                                <div class="col-12 col-md-9"><input type="text" id="add_member_fname" required name="fname" placeholder="Enter First Name" class="form-control"><small class="help-block form-text"></small></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-lname" class=" form-control-label">Last Name</label></div>
-                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_lname" name="lname" placeholder="Enter Surname" class="form-control"><small class="help-block form-text"></small></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-sex" class=" form-control-label">Sex</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="sex" id="add_member_sex" class="form-control">
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-bdate" class=" form-control-label">Birthday</label></div>
-                                <div class="col-12 col-md-9"><input type="date" id="add_member_bdate" name="bdate" class="form-control"><small class="help-block form-text"></small></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-contact" class=" form-control-label">Contact No.</label></div>
-                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_contact" name="contact" placeholder="Enter Phone Number" class="form-control"><small class="help-block form-text"></small></div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3 margin-top-10px"><label for="text-address" class=" form-control-label">Address</label></div>
-                                <div class="col-12 col-md-9"><input type="text-input" id="add_member_address" name="address" placeholder="Enter Complete Address" class="form-control"><small class="help-block form-text"></small></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+{% include 'membership/add_member_modal.html' %}
 <!--End Add Member Modal -->
 
-<!--Add Member Modal -->
-<div class="modal fade" id="addTransaction" tabindex="-1" role="dialog" aria-labelledby="addTransactionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md add-trans-modal" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addTransactionLabel">Add Givings</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card-body card-block">
-                    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                        <div class="row form-group">
-                            <div class="col col-md-4 margin-top-10px"><label for="trans-date" class="form-control-label">Date</label></div>
-                            <div class="col-12 col-md-8"><input type="date" id="trans-date" name="trans-date" class="form-control"><small class="help-block form-text"></small></div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-4 margin-top-10px"><label for="trans-name" class="form-control-label">Name</label></div>
-                            <div class="col-12 col-md-8"><input type="text-input" id="trans-name" name="trans-name" value="AAAA" disabled class="form-control"></div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-4 margin-top-10px"><label for="trans-tithe" class="form-control-label">Prayer Breakfast</label></div>
-                            <div class="col-12 col-md-8"><input type="number" id="trans-tithe" name="trans-tithe" class="form-control"></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Submit
-                    </button>
-                    <button type="reset" class="btn btn-danger btn-sm">
-                        <i class="fa fa-ban"></i> Reset
-                    </button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--Add Transaction Modal -->
+{% include 'membership/transaction_modal.html' %}
 
 {% if is_success %}
     {% if is_success == 'success' %}
@@ -235,34 +71,5 @@
     {% endif %}
 {% endif %}
 
-<!--End Add Member Modal -->
-<!-- <script type="text/javascript">
-    $(document).on('submit', '#add_member_form', function(e){
-        e.preventDefault();
-        var fname =  $('add_member_fname').val().trim();
-        var lname = $('add_member_lname').val().trim();
-        var bdate = $('add_member_bdate').val();
-        var sex = $('add_member_sex').val();
-        var contact = $('add_member_contact').val();
-        var address = $('add_member_address').val();
-
-        $.ajax({
-            type: 'POST',
-            url: "{% url 'add_member' %}",
-            data: {
-                fname: $('add_member_fname').val(),
-                lname: $('add_member_lname').val(),
-                sex: $('add_member_sex').val(),
-                contact: $('add_member_contact').val(),
-                address: $('add_member_address').val(),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val()
-            },
-            dataType: 'json',
-            success:function(){
-                alert("Created new user");
-            }
-        });
-    });
-</script> -->
 
 {% endblock %}

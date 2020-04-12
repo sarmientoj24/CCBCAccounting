@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Member
 from .forms import MemberForm
+from accounting.models import Transaction
+from accounting.forms import TransactionForm
 import datetime
 
 
@@ -25,19 +27,42 @@ def profile(request, pk):
     return render(request, 'membership/profile.html', context)
 
 
+def add_transaction(request, pk):
+    if request.method == 'POST':
+        form = TransactionForm(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            try:
+                member = Member.objects.get(id=pk)
+                instance = form.save(commit=False)
+                instance.member = member
+                instance.save()
+                return redirect('/membership')
+            except:
+                pass
+    return redirect('/membership')
+
+
+def delete_member(request, pk):
+    member = Member.objects.get(id=pk)
+    if request.method == 'POST':
+        try:
+            member.delete()
+            return redirect('/membership')
+        except:
+            pass
+
+    context = {'member': member}
+    return redirect('/membership', context)
+
+
 def add_member(request):
     is_success = "fail"
     if request.method == 'POST':
         form = MemberForm(request.POST)
-
+        print(form.errors)
         if form.is_valid():
             try:
-                form.fname = form.cleaned_data['fname']
-                form.lname = form.cleaned_data['lname']
-                form.sex = form.cleaned_data['sex']
-                form.bdate = form.cleaned_data['bdate']
-                form.contact = form.cleaned_data['contact']
-                form.address = form.cleaned_data['address']
                 form.save()
                 is_success = "success"
                 return redirect('/membership', {'is_success': is_success})
@@ -52,29 +77,3 @@ def add_member(request):
     }
     return redirect('/membership', context)
 
-
-# class AddMember(View):
-#     def post(self, request):
-#         fname = request.POST.get('fname', None)
-#         lname = request.POST.get('lname', None)
-#         sex = request.POST.get('sex', None)
-#         bdate = request.POST.get('bdate', None)
-#         contact = request.POST.get('contact', None)
-#         address = request.POST.get('address', None)
-
-#         success = "Fail"
-#         try:
-#             Member.objects.create(
-#                 fname=fname,
-#                 lname=lname,
-#                 sex=sex,
-#                 bdate=bdate,
-#                 contact=contact,
-#                 address=address
-#             )
-#         except:
-#             success = "Success"
-
-#         context = {'add_success': success}
-
-#         return redirect('/membership', context)

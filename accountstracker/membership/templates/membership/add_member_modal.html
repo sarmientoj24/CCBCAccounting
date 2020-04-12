@@ -1,0 +1,213 @@
+<div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form action="{% url 'add_member' %}" id="add_member_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMemberModalLabel">Add Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name">
+                                </div>
+                
+                                <div class="form-group col-sm-5">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name">
+                                </div>
+                
+                                <div class="form-group col-sm-3">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" name="mname" id="mname" placeholder="Middle Name">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-sm-9">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address" id="address" placeholder="Enter Complete Address">
+                                </div>
+                
+                                <div class="form-group col-sm-3">
+                                    <label for="is_member">Member</label>
+                                    <select id="is_member" name="is_member" class="form-control">
+                                        <option selected value="Member">Member</option>
+                                        <option value="Visitor">Visitor</option>
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="bdate">Date of Birth</label>
+                                    <input type="date" class="form-control" name="bdate" id="bdate" placeholder="">
+                                </div>
+                
+                                <div class="form-group col-sm-6">
+                                    <label for="bdate_place">Place of Birth</label>
+                                    <input type="text" class="form-control" name="bdate_place" id="bdate_place" placeholder="Birthplace">
+                                </div>
+                
+                                <div class="form-group col-sm-2">
+                                    <label for="age">Age</label>
+                                    <input class="form-control" type="number" name="age" id="age" placeholder="Age">
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-5">
+                                    <label for="contact">Telephone/Mobile No.</label>
+                                    <input class="form-control" type="text" name="contact" id="contact" placeholder="Contact No.">
+                                </div>
+                
+                                <div class="form-group col-sm-4">
+                                    <label for="civilstatus">Status</label>
+                                    <!-- <div class="col-md-12"> -->
+                                        <select id="civilstatus" name="civilstatus" class="form-control">
+                                            <option selected value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Separated">Separated</option>
+                                            <option value="Divorced">Divorced</option>
+                                            <option value="Widowed">Widowed</option>
+                                        </select>
+                                    <!-- </div> -->
+                                </div>
+                
+                                <div class="form-group col-sm-3">
+                                    <label for="sex">Sex</label>
+                                    <!-- <div class="col-md-12"> -->
+                                        <select id="sex" name="sex" class="form-control">
+                                            <option selected value="M">Male</option>
+                                            <option value="F">Female</option>
+                                        </select>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-5">
+                                    <label for="spouse">Name of Spouse</label>
+                                    <input class="form-control" name="spouse" type="text" id="spouse" placeholder="Name of Spouse">
+                                </div>
+                
+                                <div class="form-group col-sm-4">
+                                    <label for="spouse_occupation">His/Her Occupation</label>
+                                    <input class="form-control" name="spouse_occupation" type="text" id="spouse_occupation" placeholder="Occupation">
+                                </div>
+                
+                                <div class="form-group col-sm-3">
+                                    <label for="date_of_marriage">Date of Marriage</label>
+                                    <input type="date" name="date_of_marriage" class="form-control" id="date_of_marriage" placeholder="">
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label for="father">Name of Father</label>
+                                    <input class="form-control" name="father" type="text" id="father" placeholder="Father's Name">
+                                </div>
+                
+                                <div class="form-group col-sm-6">
+                                    <label for="father_occupation">Occupation</label>
+                                    <input class="form-control" name="father_occupation" type="text" id="father_occupation" placeholder="Occupation">
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-6">
+                                    <label for="mother">Name of Mother</label>
+                                    <input class="form-control" name="mother" type="text" id="mother" placeholder="Mother's Name">
+                                </div>
+                
+                                <div class="form-group col-sm-6">
+                                    <label for="mother_occupation">Occupation</label>
+                                    <input class="form-control" name="mother_occupation" type="text" id="mother_occupation" placeholder="Occupation">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label for="children">Children</label>
+                                <input type="text" name="children" class="form-control col-sm-8" id="children" placeholder="Enter Child Name">
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    <span>Educational Background: </span>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <span>Elementary: </span>
+                                </div>
+                                <div class="form-group col-sm-7">
+                                    <input class="form-control" name="elementary" type="text" id="elementary" placeholder="School Attended">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <input class="form-control" name="elementary_year" type="number" id="elementary_year" placeholder="Year Graduated">
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <span>High School: </span>
+                                </div>
+                                <div class="form-group col-sm-7">
+                                    <input class="form-control" name="highschool" type="text" id="highschool" placeholder="School Attended">
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <input class="form-control" name="highschool_year" type="number" id="highschool_year" placeholder="Year Graduated">
+                                </div>
+                            </div>
+                
+                            <div class="row">                    
+                                <div class="form-group col-sm-2">
+                                    <span>College: </span>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <input class="form-control" name="college" type="text" id="college" placeholder="School Attended">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <input class="form-control" name="course" type="text" id="course" placeholder="Course">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <input class="form-control" name="college_year" type="number" id="college_year" placeholder="Year">
+                                </div>
+                            </div>
+                
+                            <div class="row">                    
+                                <div class="form-group col-sm-4">
+                                    <label for="date_of_salvation">Date of Salvation</label>
+                                    <input class="form-control" name="date_of_salvation" type="date" id="date_of_salvation" placeholder="Date">
+                                </div>
+                
+                                <div class="form-group col-sm-4">
+                                    <label for="date_baptized">Date Baptized</label>
+                                    <input class="form-control" name="date_baptized" type="date" id="date_baptized" placeholder="Date">
+                                </div>
+                
+                                <div class="form-group col-sm-4">
+                                    <label for="place_baptized">Where</label>
+                                    <input class="form-control" name="place_baptized" type="text" id="place_baptized" placeholder="Place of Baptism">
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

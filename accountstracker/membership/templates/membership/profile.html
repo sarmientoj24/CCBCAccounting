@@ -5,7 +5,7 @@
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row my-2">
-            <div class="col-lg-8 order-lg-2">
+            <div class="col-lg-9 order-lg-2">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
@@ -30,18 +30,41 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Middle name</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" value="{{member.mname|default:''}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Membership</label>
+                                <div class="col-lg-9">
+                                    <select name="select" id="select" class="form-control">
+                                        {% if member.is_member == "Member" %}
+                                            <option selected value="Member">Member</option>
+                                        {% else %}
+                                            <option value="Member">Male</option>
+                                        {% endif %}
+                                        {% if member.is_member == "Visitor" %}
+                                            <option selected value="Visitor">Visitor</option>
+                                        {% else %}
+                                            <option value="Visitor">Visitor</option>
+                                        {% endif %}
+                                </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Sex</label>
                                 <div class="col-lg-9">
                                     <select name="select" id="select" class="form-control">
                                         {% if member.sex == "M" %}
-                                            <option selected value="0">Male</option>
+                                            <option selected value="M">Male</option>
                                         {% else %}
-                                            <option value="0">Male</option>
+                                            <option value="M">Male</option>
                                         {% endif %}
                                         {% if member.sex == "F" %}
-                                            <option selected value="0">Female</option>
+                                            <option selected value="F">Female</option>
                                         {% else %}
-                                            <option value="0">Female</option>
+                                            <option value="F">Female</option>
                                         {% endif %}
                                 </select>
                                 </div>
@@ -89,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 order-lg-1 text-center">
+            <div class="col-md-3 order-lg-1 text-center">
                     <div class="card">
                         <div class="card-body">
                             <div class="mx-auto d-block">
@@ -98,9 +121,16 @@
                             </div>
                             <hr>
                             <div class="text-sm-center">
-                                <button type="file" class="btn btn-primary rounded">
-                                    <span class="">Upload Photo</span>
-                                </button>
+                                <div class="col-md-6">
+                                    <button type="file" class="btn btn-primary btn-sm rounded">
+                                        <span class="">Upload Photo</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-danger btn-sm rounded" data-toggle="modal" data-target="#deletemodal">
+                                            Delete Member
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,4 +139,5 @@
     </div><!-- .animated -->
 </div><!-- .content -->
 
+{% include 'membership/delete_modal.html' %}
 {% endblock %}

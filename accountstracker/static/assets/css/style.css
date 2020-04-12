@@ -2482,3 +2482,16 @@ header .form-inline {
   animation-timing-function:ease-in-out;
   animation-direction: alternate;
 }
+
+
+.border-pane{
+  border: 1px solid rgba(0,0,0,.125) !important;
+}
+
+.card-header-blue {
+  background-color: rgba(126, 182, 214, 0.65) !important;
+}
+
+.form-group-less-btm-margin {
+  margin-bottom: 0.25rem !important;
+}

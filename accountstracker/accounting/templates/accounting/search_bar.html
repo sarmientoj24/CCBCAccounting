@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <button id="advanced_button" class="btn btn-sm btn-primary"><strong>Advanced Search</strong></button>
+            </div>
+            <div id="advanced-search-toggle">
+                <form action="{% url 'transactions' %}" id="transaction-search" method="GET">
+                    <div class="card-body card-block">
+                        <div class="form-group col-md-3">
+                            <label class=" form-control-label">Date From</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control" type="date" id="trans-date-from" value="{% now 'Y-m-d' %}" name="trans-date-from">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class=" form-control-label">Date To</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="form-control" type="date" id="trans-date-to" value="{% now 'Y-m-d' %}" name="trans-date-to">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class=" form-control-label">Service</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa ti-envelope"></i></div>
+                                    <select id="trans-service" name="service" class="form-control">
+                                        <option selected value="Worship">Worship</option>
+                                        <option value="Gospel">Gospel</option>
+                                        <option value="Prayer">Prayer</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class=" form-control-label">Name</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                <input class="form-control" type="text" id="fuzzy-name-search" name="fuzzy_name_search">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label class=" form-control-label"></label>
+                            <div class="input-group mt-2">
+                                <button class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
