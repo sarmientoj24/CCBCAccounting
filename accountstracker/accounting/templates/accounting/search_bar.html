@@ -7,29 +7,41 @@
             <div id="advanced-search-toggle">
                 <form action="{% url 'transactions' %}" id="transaction-search" method="GET">
                     <div class="card-body card-block">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label class=" form-control-label">Date From</label>
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                <input class="form-control" type="date" id="trans-date-from" value="{% now 'Y-m-d' %}" name="trans-date-from">
+                                <input class="form-control" type="date" id="trans-date-from" value="{% now 'Y-m-d' %}" name="from">
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label class=" form-control-label">Date To</label>
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                <input class="form-control" type="date" id="trans-date-to" value="{% now 'Y-m-d' %}" name="trans-date-to">
+                                <input class="form-control" type="date" id="trans-date-to" value="{% now 'Y-m-d' %}" name="to">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
                             <label class=" form-control-label">Service</label>
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa ti-envelope"></i></div>
                                     <select id="trans-service" name="service" class="form-control">
                                         <option selected value="Worship">Worship</option>
                                         <option value="Gospel">Gospel</option>
                                         <option value="Prayer">Prayer</option>
                                         <option value="Other">Other</option>
+                                        <option value="All">All</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class=" form-control-label">Currency</label>
+                            <div class="input-group">
+                                    <select id="trans-currency" name="currency" class="form-control">
+                                        <option selected value="PHP">PHP</option>
+                                        <option value="USD">USD</option>
+                                        <option value="CAD">CAD</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="JPY">JPY</option>
+                                        <option value="AUD">AUD</option>
+                                        <option value="ALL">ALL</option>
                                     </select>
                                 </div>
                         </div>
@@ -37,19 +49,18 @@
                             <label class=" form-control-label">Name</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                <input class="form-control" type="text" id="fuzzy-name-search" name="fuzzy_name_search">
+                                <input class="form-control" type="text" id="name" name="name">
                             </div>
                         </div>
                         <div class="form-group col-md-1">
                             <label class=" form-control-label"></label>
-                            <div class="input-group mt-2">
+                            <div class="input-group mt-1">
                                 <button class="btn btn-primary">Search</button>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
-            
         </div>
     </div>
 </div>

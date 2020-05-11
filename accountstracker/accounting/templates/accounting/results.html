@@ -1,0 +1,329 @@
+<tbody class="transactions-table-body">
+    {% for giving in givings %}
+    <tr>
+        <td class="smaller-font065rem" data-toggle="tooltip"
+            data-placement="top" title="{{ giving.input_date | date:'Y-m-d' }}, {{ giving.service }}">
+            {{ giving.member.lname }}, {{ giving.member.fname }}
+        </td>
+
+        {% if giving.tithe != 0 %}
+            <td>{{ giving.tithe | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.offering != 0 %}
+            <td>{{ giving.offering | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.firstfruit != 0 %}
+            <td class data-toggle="tooltip" data-placement="top"
+            title="{{ giving.firstfruit_year }}">
+            {{ giving.firstfruit | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.mission != 0 %}
+            <td>{{ giving.mission | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.care != 0 %}
+            <td>{{ giving.care | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.ladies != 0 %}
+            <td>{{ giving.ladies | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.men != 0 %}
+            <td>{{ giving.men | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.youth != 0 %}
+            <td>{{ giving.youth | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.choir != 0 %}
+            <td>{{ giving.choir | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.prayer_breakfast != 0 %}
+            <td>{{ giving.prayer_breakfast | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.circle_of_faith != 0 %}
+            <td>{{ giving.circle_of_faith | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.creative_team != 0 %}
+            <td>{{ giving.creative_team | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.dvbs != 0 %}
+            <td>{{ giving.dvbs | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.prison_ministry != 0 %}
+            <td>{{ giving.prison_ministry | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.others != 0 %}
+            <td data-toggle="tooltip"
+            data-placement="top" title="{{ giving.others_description }}">{{ giving.others | floatformat }}</td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+
+        {% if giving.total != 0 %}
+            <td>{{ giving.total | floatformat }}
+                {% if giving.currency == 'USD' %}
+                    <i class="flag-icon flag-icon-us"></i>
+                {% elif giving.currency == 'CAD' %}
+                    <i class="flag-icon flag-icon-ca"></i>
+                {% elif giving.currency == 'EUR' %}
+                    <i class="flag-icon flag-icon-eu"></i>
+                {% elif giving.currency == 'JPY' %}
+                    <i class="flag-icon flag-icon-jp"></i>
+                {% elif giving.currency == 'AUD' %}
+                    <i class="flag-icon flag-icon-us-au"></i>
+                {% else %}
+                    <i></i>
+                {% endif %}
+            </td>
+        {% else %}
+            <td class="zero-giving"></td>
+        {% endif%}
+    </tr>
+    {% endfor %}
+
+    <tr class="blue-background  total-strong">
+            <td class="smaller-font065rem">
+                <strong>Current Page Total</strong>
+            </td>
+
+            {% if paginated_total.tithe != 0 %}
+                <td>{{ paginated_total.tithe | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.offering != 0  %}
+                <td>{{ paginated_total.offering | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.firstfruit != 0  %}
+                <td>
+                {{ paginated_total.firstfruit | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.mission != 0  %}
+                <td>{{ paginated_total.mission | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.care != 0  %}
+                <td>{{ paginated_total.care | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.ladies != 0  %}
+                <td>{{ paginated_total.ladies | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.men != 0  %}
+                <td>{{ paginated_total.men | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.youth != 0  %}
+                <td>{{ paginated_total.youth | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.choir != 0  %}
+                <td>{{ paginated_total.choir | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.prayer_breakfast != 0 %}
+                <td>{{ paginated_total.prayer_breakfast | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.circle_of_faith != 0 %}
+                <td>{{ paginated_total.circle_of_faith | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.creative_team != 0 %}
+                <td>{{ paginated_total.creative_team | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.dvbs != 0 %}
+                <td>{{ paginated_total.dvbs | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.prison_ministry != 0  %}
+                <td>{{ paginated_total.prison_ministry | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.others != 0  %}
+                <td>{{ paginated_total.others | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+
+            {% if paginated_total.total != 0  %}
+                <td>{{ paginated_total.total | floatformat }}</td>
+            {% else %}
+                <td></td>
+            {% endif%}
+    </tr>
+
+    <tr class="red-background total-strong">
+        <td class="smaller-font065rem">
+            <strong>Query Total</strong>
+        </td>
+
+        {% if unpaginated_total.tithe != 0 %}
+            <td>{{ unpaginated_total.tithe | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.offering != 0  %}
+            <td>{{ unpaginated_total.offering | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.firstfruit != 0  %}
+            <td>
+            {{ unpaginated_total.firstfruit | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.mission != 0  %}
+            <td>{{ unpaginated_total.mission | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.care != 0  %}
+            <td>{{ unpaginated_total.care | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.ladies != 0  %}
+            <td>{{ unpaginated_total.ladies | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.men != 0  %}
+            <td>{{ unpaginated_total.men | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.youth != 0  %}
+            <td>{{ unpaginated_total.youth | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.choir != 0  %}
+            <td>{{ unpaginated_total.choir | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.prayer_breakfast != 0 %}
+            <td>{{ unpaginated_total.prayer_breakfast | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.circle_of_faith != 0 %}
+            <td>{{ unpaginated_total.circle_of_faith | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.creative_team != 0 %}
+            <td>{{ unpaginated_total.creative_team | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.dvbs != 0 %}
+            <td>{{ unpaginated_total.dvbs | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.prison_ministry != 0  %}
+            <td>{{ unpaginated_total.prison_ministry | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.others != 0  %}
+            <td>{{ unpaginated_total.others | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+
+        {% if unpaginated_total.total != 0  %}
+            <td>{{ unpaginated_total.total | floatformat }}</td>
+        {% else %}
+            <td></td>
+        {% endif%}
+    </tr>
+</tbody>

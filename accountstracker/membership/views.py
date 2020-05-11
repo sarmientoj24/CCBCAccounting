@@ -31,12 +31,30 @@ def add_transaction(request, pk):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         print(form.errors)
+
         if form.is_valid():
             try:
                 member = Member.objects.get(id=pk)
                 instance = form.save(commit=False)
                 instance.member = member
-                instance.save()
+                instance.tithe = instance.tithe if instance.tithe is not None else 0
+                instance.offering = instance.offering if instance.offering is not None else 0
+                instance.firstfruit = instance.firstfruit if instance.firstfruit is not None else 0
+                instance.mission = instance.mission if instance.mission is not None else 0
+                instance.care = instance.care if instance.care is not None else 0
+                instance.ladies = instance.ladies if instance.ladies is not None else 0
+                instance.men = instance.men if instance.men is not None else 0
+                instance.youth = instance.youth if instance.youth is not None else 0
+                instance.choir = instance.choir if instance.choir is not None else 0
+                instance.prayer_breakfast = instance.prayer_breakfast if instance.prayer_breakfast is not None else 0
+                instance.circle_of_faith = instance.circle_of_faith if instance.circle_of_faith is not None else 0
+                instance.creative_team = instance.creative_team if instance.creative_team is not None else 0
+                instance.dvbs = instance.dvbs if instance.dvbs is not None else 0
+                instance.prison_ministry = instance.prison_ministry if instance.prison_ministry is not None else 0
+                instance.others = instance.others if instance.others is not None else 0
+
+                if instance.total is not None and instance.total > 0:
+                    instance.save()
                 return redirect('/membership')
             except:
                 pass

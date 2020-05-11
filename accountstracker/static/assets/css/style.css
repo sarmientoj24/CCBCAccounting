@@ -2495,3 +2495,35 @@ header .form-inline {
 .form-group-less-btm-margin {
   margin-bottom: 0.25rem !important;
 }
+
+.transactions-table-head{
+  font-size: 0.7rem !important;
+}
+
+.transactions-table-body{
+  font-size: 0.70rem !important;
+}
+
+.zero-giving{
+  background: #f1f2f7;
+}
+
+.smaller-font06rem{
+  font-size: 0.6rem !important;
+}
+
+.smaller-font065rem{
+  font-size: 0.65rem !important;
+}
+
+.blue-background{
+  background-color: #a0ceff;
+}
+
+.red-background{
+  background-color: #f9c5ca;
+}
+
+.total-strong{
+  font-weight: bold !important;
+}

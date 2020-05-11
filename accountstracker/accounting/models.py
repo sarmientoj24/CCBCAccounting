@@ -1,5 +1,6 @@
 from django.db import models
 from membership.models import Member
+from datetime import date
 
 
 class Transaction(models.Model):
@@ -19,31 +20,36 @@ class Transaction(models.Model):
         ('Other', 'Other')
     )
 
+    today = date.today()
+    today_date = today.strftime("%Y-%m-%d")
+    today_year = today.strftime("%Y")
+
     member = models.ForeignKey(
         Member, blank=True, null=True, on_delete=models.SET_NULL)
-    input_date = models.DateTimeField(null=True, blank=True)
+    input_date = models.DateField(default=today_date, blank=True)
     service = models.CharField(max_length=10, choices=SERVICE)
     currency = models.CharField(max_length=3, choices=CURRENCY)
-    tithe = models.FloatField(null=True, blank=True)
-    offering = models.FloatField(null=True, blank=True)
-    firstfruit = models.FloatField(null=True, blank=True)
-    firstfruit_year = models.PositiveIntegerField(blank=True, null=True)
-    mission = models.FloatField(null=True, blank=True)
-    care = models.FloatField(null=True, blank=True)
-    ladies = models.FloatField(null=True, blank=True)
-    men = models.FloatField(null=True, blank=True)
-    youth = models.FloatField(null=True, blank=True)
-    choir = models.FloatField(null=True, blank=True)
-    prayer_breakfast = models.FloatField(null=True, blank=True)
-    circle_of_faith = models.FloatField(null=True, blank=True)
-    creative_team = models.FloatField(null=True, blank=True)
-    dvbs = models.FloatField(null=True, blank=True)
-    prison_ministry = models.FloatField(null=True, blank=True)
+    tithe = models.FloatField(blank=True, null=True)
+    offering = models.FloatField(blank=True, null=True)
+    firstfruit = models.FloatField(blank=True, null=True)
+    firstfruit_year = models.PositiveIntegerField(
+        blank=True, default=today_year)
+    mission = models.FloatField(blank=True, null=True)
+    care = models.FloatField(blank=True, null=True)
+    ladies = models.FloatField(blank=True, null=True)
+    men = models.FloatField(blank=True, null=True)
+    youth = models.FloatField(blank=True, null=True)
+    choir = models.FloatField(blank=True, null=True)
+    prayer_breakfast = models.FloatField(blank=True, null=True)
+    circle_of_faith = models.FloatField(blank=True, null=True)
+    creative_team = models.FloatField(blank=True, null=True)
+    dvbs = models.FloatField(blank=True, null=True)
+    prison_ministry = models.FloatField(blank=True, null=True)
 
-    others = models.FloatField(null=True, blank=True)
+    others = models.FloatField(blank=True, null=True)
     others_description = models.CharField(max_length=50, null=True, blank=True)
 
-    total = models.FloatField(null=True, blank=True)
+    total = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return str(self.id)

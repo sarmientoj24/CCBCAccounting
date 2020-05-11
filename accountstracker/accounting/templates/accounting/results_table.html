@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">Givings</strong>
+            </div>
+            <div class="card-body">
+                <table id="bootstrap-data-table-export" class="table table-bordered">
+                    <thead class="transactions-table-head">
+                        <tr>
+                            <th>NAME</th>
+                            <th>TITHE</th>
+                            <th>OFFRG</th>
+                            <th>FSFRT</th>
+                            <th>MISSN</th>
+                            <th>CAREM</th>
+                            <th>LDIES</th>
+                            <th>MENMR</th>
+                            <th>YOUTH</th>
+                            <th>CHOIR</th>
+                            <th>PRYER</th>
+                            <th>CIRCL</th>
+                            <th>CREAT</th>
+                            <th>DVBSM</th>
+                            <th>PRSON</th>
+                            <th>OTHER</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    {% include 'accounting/results.html' %}
+                </table>
+                {% include 'accounting/pagination.html' %}
+            </div>
+        </div>
+    </div>
+</div>
