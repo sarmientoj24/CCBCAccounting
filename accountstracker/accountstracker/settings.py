@@ -80,6 +80,12 @@ WSGI_APPLICATION = 'accountstracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        # The following settings are not used with sqlite3:
+        'NAME': '[database]',
+        'USER': '[user]',
+        'PASSWORD': '[password]',
+        'HOST': '[host]',                 # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '[port]',  
         'OPTIONS': {
             'read_default_file': '/etc/mysql/my.cnf',
         },
