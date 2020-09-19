@@ -4,17 +4,29 @@ from .forms import MemberForm
 from accounting.models import Transaction
 from accounting.forms import TransactionForm
 import datetime
+from django.db.models import Q
 
 
 def members(request):
-    members = Member.objects.all()
+    if request.method == 'GET' and 'query' in request.GET:
+        query = request.GET.get('query', None)
+        members = Member.objects.filter(
+            Q(fname__icontains=query) |
+            Q(lname__icontains=query) |
+            Q(mname__icontains=query)
+        )
+
+    else:
+        members = Member.objects.all()
+
     yesterday = datetime.date.today() - datetime.timedelta(days=1)
-    members_today = Member.objects.filter(date_created__gt=yesterday)
+    total_members = Member.objects.count()
+    members_today = Member.objects.filter(date_created__gt=yesterday).count()
 
     context = {
         'members': members,
-        'members_count': len(members),
-        'created_today_count': len(members_today)
+        'members_count': total_members,
+        'created_today_count': members_today
     }
 
     return render(request, 'membership/membership.html', context)

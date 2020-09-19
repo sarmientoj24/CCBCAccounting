@@ -14,10 +14,9 @@
                             <strong class="card-title">Members</strong>
                         </div>
                         <div class="col col-lg-4">
-                            <form action="" method="post" class="form">
+                            <form action="{% url 'members' %}" id="search-member" method="GET">
                                 <div class="input-group">
-                                    <input type="text" id="member-search" name="input2-group2" placeholder="" class="form-control">
-                                    {% csrf_token %}
+                                    <input type="text" id="query" name="query" placeholder="" class="form-control">
                                     <div class="input-group-btn"><button class="btn btn-primary">Search</button></div>
                                 </div>
                             </form>
