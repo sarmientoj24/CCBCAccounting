@@ -5,16 +5,24 @@ from accounting.models import Transaction
 from accounting.forms import TransactionForm
 import datetime
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
+PAGE_LIMIT = 10
 
 def members(request):
+    context = {}
+
     if request.method == 'GET' and 'query' in request.GET:
         query = request.GET.get('query', None)
+        get_copy = request.GET.copy()
+        uri_parameters = get_copy.pop('page', True) and get_copy.urlencode()
         members = Member.objects.filter(
             Q(fname__icontains=query) |
             Q(lname__icontains=query) |
             Q(mname__icontains=query)
         )
+
+        context['uri_parameters'] = uri_parameters
 
     else:
         members = Member.objects.all()
@@ -23,8 +31,20 @@ def members(request):
     total_members = Member.objects.count()
     members_today = Member.objects.filter(date_created__gt=yesterday).count()
 
+    members = members.order_by("lname", "fname", "mname")
+    paginator = Paginator(members, PAGE_LIMIT)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        page_members = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        page_members = paginator.page(paginator.num_pages)
+
     context = {
-        'members': members,
+        'members': page_members,
         'members_count': total_members,
         'created_today_count': members_today
     }
