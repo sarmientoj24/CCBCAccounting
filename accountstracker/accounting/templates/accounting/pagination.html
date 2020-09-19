@@ -1,7 +1,7 @@
 {% if givings.has_other_pages %}
     <ul class="pagination pagination-sm">
     {% if givings.has_previous and parameters %}
-        <li class="page-item"><a class="page-link" href="?page={{ givings.previous_page_number }}&{{ parameters }}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ givings.previous_page_number }}&{{ uri_parameters }}">&laquo;</a></li>
     {% elif givings.has_previous%}
         <li class="page-item"><a class="page-link" href="?page={{ givings.previous_page_number }}">&laquo;</a></li>
     {% else %}
@@ -12,7 +12,7 @@
         <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
             {% if parameters %}
-            <li class="page-item"><a class="page-link" href="?page={{ i }}&{{ parameters }}">{{ i }}</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ i }}&{{ uri_parameters }}">{{ i }}</a></li>
             {% else %}
             <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
             {% endif %}

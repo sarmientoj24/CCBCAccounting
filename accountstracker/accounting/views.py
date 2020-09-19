@@ -5,13 +5,13 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from datetime import datetime
 
-PAGE_LIMIT = 20
+PAGE_LIMIT = 15
 THREE_O_CLOCK = 15
 
 def transactions(request):
     if request.method == 'GET' and 'name' in request.GET:
         get_copy = request.GET.copy()
-        parameters = get_copy.pop('page', True) and get_copy.urlencode()
+        uri_parameters = get_copy.pop('page', True) and get_copy.urlencode()
 
         name_search = request.GET.get('name', None)
         service_search = request.GET.get('service', None)
@@ -51,18 +51,6 @@ def transactions(request):
                 Q(member__in=members)
             )
 
-        transactions = transactions.order_by("id")
-        paginator = Paginator(transactions, PAGE_LIMIT)
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-
-        try:
-            givings = paginator.page(page)
-        except(EmptyPage, InvalidPage):
-            givings = paginator.page(paginator.num_pages)
-
         parameters = {
             'name': name_search if name_search else '',
             'service': service_search if service_search else 'Worship',
@@ -72,7 +60,7 @@ def transactions(request):
         }
 
         context = {
-            'givings': givings,
+            'uri_parameters': uri_parameters,
             'parameters': parameters
         }
 
@@ -103,22 +91,21 @@ def transactions(request):
             service=service_default
         )
 
-        transactions = transactions.order_by("id")
-        paginator = Paginator(transactions, PAGE_LIMIT)
-        try:
-            page = int(request.GET.get('page', '1'))
-        except:
-            page = 1
-
-        try:
-            givings = paginator.page(page)
-        except(EmptyPage, InvalidPage):
-            givings = paginator.page(paginator.num_pages)
-
         context = {
-            'givings': givings,
             'parameters': parameters
         }
+
+    transactions = transactions.order_by("id")
+    paginator = Paginator(transactions, PAGE_LIMIT)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        givings = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        givings = paginator.page(paginator.num_pages)
 
     paginated_total = {
         'tithe': sum([float(i.tithe) for i in givings]),
@@ -158,6 +145,7 @@ def transactions(request):
         'total': sum([float(i.total) for i in transactions])
     }
 
+    context['givings'] = givings
     context['paginated_total'] = paginated_total
     context['unpaginated_total'] = unpaginated_total
 
