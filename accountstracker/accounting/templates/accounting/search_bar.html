@@ -10,24 +10,45 @@
                         <div class="form-group col-md-2">
                             <label class=" form-control-label">Date From</label>
                             <div class="input-group">
-                                <input class="form-control" type="date" id="trans-date-from" value="{% now 'Y-m-d' %}" name="from">
+                                <input class="form-control" type="date" id="trans-date-from" value="{{ parameters.from }}" name="from">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
                             <label class=" form-control-label">Date To</label>
                             <div class="input-group">
-                                <input class="form-control" type="date" id="trans-date-to" value="{% now 'Y-m-d' %}" name="to">
+                                <input class="form-control" type="date" id="trans-date-to" value="{{ parameters.to }}" name="to">
                             </div>
                         </div>
                         <div class="form-group col-md-2">
                             <label class=" form-control-label">Service</label>
                             <div class="input-group">
                                     <select id="trans-service" name="service" class="form-control">
-                                        <option selected value="Worship">Worship</option>
-                                        <option value="Gospel">Gospel</option>
-                                        <option value="Prayer">Prayer</option>
-                                        <option value="Other">Other</option>
-                                        <option value="All">All</option>
+                                        <option 
+                                            {% if parameters.service == 'Worship' %}
+                                                selected
+                                            {% endif %} 
+                                                value="Worship">Worship
+                                        </option>
+                                        <option 
+                                            {% if parameters.service == 'Gospel' %}
+                                                selected
+                                            {% endif %}
+                                        value="Gospel">Gospel</option>
+                                        <option
+                                        {% if parameters.service == 'Prayer' %}
+                                            selected 
+                                        {% endif %}
+                                        value="Prayer">Prayer</option>
+                                        <option 
+                                        {% if parameters.service == 'Other' %}
+                                            selected
+                                        {% endif %}
+                                        value="Other">Other</option>
+                                        <option 
+                                        {% if parameters.service == 'All' %}
+                                            selected
+                                        {% endif %}
+                                        value="All">All</option>
                                     </select>
                                 </div>
                         </div>
@@ -35,13 +56,27 @@
                             <label class=" form-control-label">Currency</label>
                             <div class="input-group">
                                     <select id="trans-currency" name="currency" class="form-control">
-                                        <option selected value="PHP">PHP</option>
-                                        <option value="USD">USD</option>
-                                        <option value="CAD">CAD</option>
-                                        <option value="EUR">EUR</option>
-                                        <option value="JPY">JPY</option>
-                                        <option value="AUD">AUD</option>
-                                        <option value="ALL">ALL</option>
+                                        <option {% if parameters.currency == 'PHP' %}
+                                            selected
+                                        {% endif %} value="PHP">PHP</option>
+                                        <option {% if parameters.currency == 'USD' %}
+                                            selected
+                                        {% endif %} value="USD">USD</option>
+                                        <option {% if parameters.currency == 'CAD' %}
+                                            selected
+                                        {% endif %} value="CAD">CAD</option>
+                                        <option {% if parameters.currency == 'EUR' %}
+                                            selected
+                                        {% endif %} value="EUR">EUR</option>
+                                        <option {% if parameters.currency == 'JPY' %}
+                                            selected
+                                        {% endif %} value="JPY">JPY</option>
+                                        <option {% if parameters.currency == 'AUD' %}
+                                            selected
+                                        {% endif %} value="AUD">AUD</option>
+                                        <option {% if parameters.currency == 'ALL' %}
+                                            selected
+                                        {% endif %} value="ALL">ALL</option>
                                     </select>
                                 </div>
                         </div>

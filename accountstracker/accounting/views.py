@@ -3,10 +3,10 @@ from membership.models import Member
 from .models import Transaction
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from datetime import datetime
 
-
-PAGE_LIMIT = 3
-
+PAGE_LIMIT = 20
+THREE_O_CLOCK = 15
 
 def transactions(request):
     if request.method == 'GET' and 'name' in request.GET:
@@ -20,8 +20,6 @@ def transactions(request):
         from_data = request.GET.get('from', '2019-01-01')
 
         currency = request.GET.get('currency', 'PHP')
-
-        print(name_search, to_data, from_data, currency, service_search)
 
         to_data = '2030-01-01' if to_data is None or to_data == '' \
             else to_data
@@ -65,8 +63,13 @@ def transactions(request):
         except(EmptyPage, InvalidPage):
             givings = paginator.page(paginator.num_pages)
 
-        for giving in givings:
-            print("#", giving.member.fname)
+        parameters = {
+            'name': name_search if name_search else '',
+            'service': service_search if service_search else 'Worship',
+            'to': to_data,
+            'from': from_data,
+            'currency': currency
+        }
 
         context = {
             'givings': givings,
@@ -74,8 +77,31 @@ def transactions(request):
         }
 
     else:
-        print("not get")
-        transactions = Transaction.objects.all()
+        date_today = datetime.today().strftime('%Y-%m-%d')
+        time_today = int(datetime.now().strftime('%H'))
+
+        if time_today >= THREE_O_CLOCK:
+            service_default = "Gospel"
+        else:
+            service_default = "Worship"
+
+        currency_default = 'PHP'
+
+        parameters = {
+            'name': '',
+            'service': service_default,
+            'to': date_today,
+            'from': date_today,
+            'currency': currency_default
+        }
+
+        transactions = Transaction.objects.filter(
+            input_date__range=[date_today, date_today]
+        ).filter(
+            currency=currency_default
+        ).filter(
+            service=service_default
+        )
 
         transactions = transactions.order_by("id")
         paginator = Paginator(transactions, PAGE_LIMIT)
@@ -89,10 +115,9 @@ def transactions(request):
         except(EmptyPage, InvalidPage):
             givings = paginator.page(paginator.num_pages)
 
-        print(givings)
-
         context = {
-            'givings': givings
+            'givings': givings,
+            'parameters': parameters
         }
 
     paginated_total = {
