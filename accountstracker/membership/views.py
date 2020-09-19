@@ -30,7 +30,6 @@ def profile(request, pk):
 def add_transaction(request, pk):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
-        print(form.errors)
 
         if form.is_valid():
             try:
@@ -78,12 +77,10 @@ def add_member(request):
     is_success = "fail"
     if request.method == 'POST':
         form = MemberForm(request.POST)
-        print(form.errors)
         if form.is_valid():
             try:
                 form.save()
                 is_success = "success"
-                return redirect('/membership', {'is_success': is_success})
             except:
                 pass
     else:
