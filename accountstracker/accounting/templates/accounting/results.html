@@ -100,7 +100,10 @@
         {% endif%}
 
         {% if giving.total != 0 %}
-            <td>{{ giving.total | floatformat }}
+            <td
+                data-toggle="tooltip"
+                data-placement="top" title="TN: {{ giving.id }}"
+            >{{ giving.total | floatformat }}
                 {% if giving.currency == 'USD' %}
                     <i class="flag-icon flag-icon-us"></i>
                 {% elif giving.currency == 'CAD' %}
