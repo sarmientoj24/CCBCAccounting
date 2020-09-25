@@ -2,7 +2,16 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">Givings</strong>
+                <div class="col col-lg-8">
+                    <strong class="card-title">Givings</strong>
+                </div>
+                <div class="col col-lg-4">
+                    <form action="{% url 'export_to_csv' %}" id="save-to-csv" method="GET">
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-primary btn-sm">Export</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <table id="bootstrap-data-table-export" class="table table-bordered">
